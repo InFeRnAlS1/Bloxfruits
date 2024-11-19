@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nous Contacter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        header {
+            background-color: #21b6a6;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #1a1a1a;
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #2b2b2b;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 1s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: #21b6a6;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: #333;
+            color: #21b6a6;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #ff8c00;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.8);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            background-color: #ff8c00;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.9em;
+            margin-top: 5px;
+            animation: shake 0.5s ease-out;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+            75% {
+                transform: translateX(-5px);
+            }
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            color: #f5f5f5;
+            animation: fadeIn 2s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <header>Contactez-nous</header>
+    <div class="content">
+        <form action="traitement.php" method="post" id="contactForm">
+            <label for="username"> Votre nom ici :</label>
+            <input type="text" id="username" name="username" placeholder="Votre nom"/>
+            <span id="nerror" class="error-message"></span>
+
+            <label for="mail"> Votre adresse E-mail (valide) :</label>
+            <input type="email" id="mail" name="mail" placeholder="Votre adresse e-mail"/>
+            <span id="error" class="error-message"></span>
+
+            <label for="msg"> Votre message :</label>
+            <textarea id="msg" name="msg" rows="5" placeholder="Votre message ici..."></textarea>
+            <span id="terror" class="error-message"></span>
+
+            <button type="submit">Envoyer le formulaire</button>
+        </form>
+    </div>
+
+    <footer>
+        &copy; Blox fruits player | <a href="index.html" style="color: #21b6a6;">Menu.</a>
+    </footer>
+
+    <script type="text/javascript">
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            let valid = true;
+            const username = document.getElementById('username');
+            const email = document.getElementById('mail');
+            const message = document.getElementById('msg');
+            const nameError = document.getElementById('nerror');
+            const emailError = document.getElementById('error');
+            const msgError = document.getElementById('terror');
+            const nameRegex = /^[a-zA-Z-\s]+$/;
+
+            // Validation du nom
+            if (username.value.trim() === "") {
+                nameError.textContent = "Veuillez entrer votre nom.";
+                valid = false;
+            } else if (!nameRegex.test(username.value)) {
+                nameError.textContent = "Le nom doit comporter uniquement des lettres et des tirets. Ex: Jean-Tabarnak";
+                valid = false;
+            } else {
+                nameError.textContent = "";
+            }
+
+            // Validation de l'e-mail
+            if (email.value.trim() === "") {
+                emailError.textContent = "Veuillez entrer une adresse mail.";
+                valid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            // Validation du message
+            if (message.value.trim() === "") {
+                msgError.textContent = "Veuillez écrire un message.";
+                valid = false;
+            } else {
+                msgError.textContent = "";
+            }
+
+            // Empêcher l'envoi si le formulaire n'est pas valide
+            if (!valid) e.preventDefault();
+        });
+    </script>
+</body>
+</html>

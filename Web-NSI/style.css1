@@ -1,0 +1,12 @@
+h2
+{
+      text-align: center;
+      background-color: cyan;
+
+}
+p
+{
+      font-family: Verdana;
+      font-style: italic;
+      color: green;
+}
